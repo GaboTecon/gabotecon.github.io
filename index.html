@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tecon LLC - Construction Services</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Slideshow Modal -->
+  <div id="slideshow-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="slideshow-container">
+        <div class="slideshow-slides">
+          <!-- Slides will be inserted here dynamically -->
+        </div>
+        <button class="slideshow-prev">&#10094;</button>
+        <button class="slideshow-next">&#10095;</button>
+      </div>
+      <div class="slideshow-caption"></div>
+      <div class="slideshow-dots">
+        <!-- Dots will be inserted here dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Dots -->
+  <div class="nav-dots">
+    <a href="#hero" class="nav-dot active"></a>
+    <a href="#projects" class="nav-dot"></a>
+    <a href="#about" class="nav-dot"></a>
+    <a href="#services" class="nav-dot"></a>
+    <a href="#where-we-work" class="nav-dot"></a>
+    <a href="#partners" class="nav-dot"></a>
+    <a href="#contact" class="nav-dot"></a>
+    <a href="#footer" class="nav-dot"></a>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <div class="logo-square"></div>
+          <span class="logo-text">TECON LLC</span>
+        </a>
+        <nav>
+          <a href="#hero">Home</a>
+          <a href="#projects">Projects</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#where-we-work">Where We Work</a>
+          <a href="#partners">Partners</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="button button-primary" style="display: none;">Get a Quote</button>
+        <!--<button class="mobile-menu-button">
+          <svg class="icon" viewBox="0 0 24 24">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
+        </button>-->
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="hero-bg"></div>
+      <div class="container">
+        <div class="hero-content">
+          <h1>Building Excellence, <br class="hidden-mobile">Constructing Trust</h1>
+          <p>Tecon LLC delivers exceptional construction management services with precision, quality, and innovation.</p>
+          <div class="hero-buttons">
+            <a href="#projects" class="button button-primary button-lg">
+              Our Projects
+              <svg class="icon icon-sm" viewBox="0 0 24 24" style="margin-left: 0.25rem;">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#contact" class="button button-outline button-lg">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      <!--<div class="scroll-indicator">
+        <span class="scroll-indicator-text">Scroll Down</span>
+        <svg class="scroll-indicator-arrow" viewBox="0 0 24 24">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </div>-->
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="bg-muted">
+      <div class="container">
+        <h2 class="section-title">Our Projects</h2>
+        <p class="section-description">Explore our portfolio of successful construction projects delivered with excellence.</p>
+        
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card" data-project="sorrento">
+            <div class="project-image">
+              <img src="img/sorrento1.jpg" alt="Sorrento Villas Hotel">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Sorrento Villas Hotel</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Miami Beach</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>est. 2025</span>
+              </div>
+              <p class="project-description">A 3-story addition to a newly renovated hotel.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="project-card" data-project="bestwestern">
+            <div class="project-image">
+              <img src="img/bestwestern1.jpg" alt="Best Western Doral">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Best Western Doral</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Doral, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>[YEAR]</span>
+              </div>
+              <p class="project-description">Construction management in Doral, Florida.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="project-card" data-project="wynwood">
+            <div class="project-image">
+              <img src="img/wynwood1.jpg" alt="Hospital Expansion">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Wynwood complex</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Wynwood, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>2026 est.</span>
+              </div>
+              <p class="project-description">Commercial development for rent with high returns.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="project-card" data-project="balharbour">
+            <div class="project-image">
+              <img src="img/balharbour1.jpg" alt="Bal Harbour">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Bal Harbour Residences</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Bal Harbour, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>2026 est.</span>
+              </div>
+              <p class="project-description">Development advisory for luxury tower.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div class="project-card" data-project="bella">
+            <div class="project-image">
+              <img src="img/bella1.jpg" alt="Bella condominiums">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Bella condominiums</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span> Sunny Isles Beach, FL </span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>[year]</span>
+              </div>
+              <p class="project-description">Construction management at Sunny Isles Beach.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>          
+
+          <!-- Project 6 -->
+          <div class="project-card" data-project="vanburen">
+            <div class="project-image">
+              <img src="img/vanburen1.jpg" alt="Van ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Van Buren ST</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Hollywood, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>[year]</span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+         
+          <!-- Project 7 -->
+          <div class="project-card" data-project="royalpalm">
+            <div class="project-image">
+              <img src="img/royalpalm1.jpg" alt="327 Royal Palm ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">327 Royal Palm</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Boca Raton, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>[year]</span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 8 -->
+          <div class="project-card" data-project="deerfield">
+            <div class="project-image">
+              <img src="img/deerfield1.jpg" alt="Van ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">1900 Deerfield Beach</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Deerfield Beach, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>[year]</span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 9 -->
+          <div class="project-card" data-project="fordham">
+            <div class="project-image">
+              <img src="img/fordham1.jpg" alt="Van ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">The Fordham at Deerfield</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Deerfield Beach, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>[year]</span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 10 -->
+          <div class="project-card" data-project="townhousei">
+            <div class="project-image">
+              <img src="img/townhousei1.jpg" alt="Van ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Bayview Village Townhomes I</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Fort Lauderdale, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>[year]</span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 11 -->
+          <div class="project-card" data-project="townhouseii">
+            <div class="project-image">
+              <img src="img/townhouseii1.jpg" alt="Van ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Bayview Village Townhomes I</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Fort Lauderdale, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>[year]</span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+          <!--projects end-->
+        </div>
+      </div>
+      <!--<div class="scroll-indicator">
+        <svg class="scroll-indicator-arrow" viewBox="0 0 24 24">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </div>-->
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-content">
+            <h2 class="about-title">About Tecon LLC</h2>
+            <p class="about-text">
+              Founded in [year], Tecon LLC has established itself as a leader in the construction industry, delivering
+              exceptional projects across commercial, residential, and industrial sectors. [REDACTAR]
+            </p>
+            <p class="about-text">
+              Our team of experienced professionals brings expertise, innovation, and dedication to every project,
+              ensuring the highest standards of quality and client satisfaction. [REDACTAR]
+            </p>
+            <div>
+              <h3 class="values-title">Our Values</h3>
+              <ul class="values-list">
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Quality and Excellence</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Safety and Reliability</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Innovation and Sustainability</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Client Satisfaction</span>
+                </li>
+              </ul>
+            </div>
+            <!--<div>
+              <a href="#about" class="button button-outline">Learn More About Us</a>
+            </div>-->
+          </div>
+          <div class="about-image">
+            <img src="IMG/logo.svg" alt="Tecon LLC team">
+          </div>
+        </div>
+      </div>
+      <!--<div class="scroll-indicator">
+        <svg class="scroll-indicator-arrow" viewBox="0 0 24 24">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </div>-->
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="bg-muted">
+      <div class="container">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-description">Comprehensive construction solutions tailored to your specific needs.</p>
+        
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+                <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+                <path d="M9 22v-4h6v4"></path>
+                <path d="M8 6h.01"></path>
+                <path d="M16 6h.01"></path>
+                <path d="M12 6h.01"></path>
+                <path d="M12 10h.01"></path>
+                <path d="M12 14h.01"></path>
+                <path d="M16 10h.01"></path>
+                <path d="M16 14h.01"></path>
+                <path d="M8 10h.01"></path>
+                <path d="M8 14h.01"></path>
+              </svg>
+            </div>
+            <h3 class="service-title">Commercial Developments</h3>
+            <p class="service-description">Office buildings, retail spaces, and commercial facilities built to the highest standards.</p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <h3 class="service-title">Residential Developments</h3>
+            <p class="service-description">Custom homes, multi-family residences, and residential developments with attention to detail.</p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
+                <path d="M17 18h1"></path>
+                <path d="M12 18h1"></path>
+                <path d="M7 18h1"></path>
+              </svg>
+            </div>
+            <h3 class="service-title">Owner's representation</h3>
+            <p class="service-description">Advocating for owners throughout the development process, ensuring projects are delivered on time, within budget, and to the highest quality standards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where We Work Section -->
+    <section id="where-we-work">
+      <div class="container">
+        <h2 class="section-title">Where We Work</h2>
+        <p class="section-description">Serving the greater Miami area with quality construction services.</p>
+        
+        <div class="where-we-work-grid">
+          <div>
+            <h3 class="locations-title">Miami and Surrounding Areas</h3>
+            <p class="locations-text">
+              Tecon LLC is proud to serve Miami and the surrounding areas in South Florida. Our team has extensive
+              experience working throughout the region, delivering exceptional construction projects to clients in:
+            </p>
+            <ul class="locations-grid">
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Downtown Miami</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Brickell</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Miami Beach</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Coral Gables</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Doral</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Hialeah</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Fort Lauderdale</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>West Palm Beach</span>
+              </li>
+            </ul>
+            <p class="locations-text" style="margin-top: 1.5rem;">
+              Our local expertise allows us to navigate the unique building requirements, regulations, and
+              environmental considerations specific to South Florida construction.
+            </p>
+          </div>
+          <div class="map-container">
+            <svg class="florida-map" viewBox="0 0 400 600" width="600" height="600">
+              <!-- Florida outline -->
+              <path
+                d="M 8540 -9192 c 0 309 -4 533 -9 536 c -5 4 -104 -91 -220 -211 l -210 -217 l -381 18 c -209 9 -568 25 -797 36 c -913 42 -1326 61 -1963 90 c -366 16 -695 32 -732 35 c -79 6 -63 20 -218 -203 c -120 -174 -95 -161 -277 -142 c -54 6 -339 33 -633 60 c -510 48 -1009 95 -1700 160 c -173 16 -508 48 -745 70 c -552 51 -605 57 -609 61 c -2 2 -9 78 -15 169 c -6 91 -16 193 -22 228 c -8 42 -8 66 -1 75 c 5 6 60 120 121 252 c 62 132 116 242 120 245 c 5 3 84 1 175 -4 l 167 -9 l 75 -104 l 76 -103 l 152 0 l 152 0 l 144 85 c 79 47 148 85 152 85 c 5 0 133 -56 284 -125 c 151 -69 282 -125 290 -125 c 11 0 14 22 14 115 c 0 103 2 115 18 115 c 9 0 79 5 154 10 l 138 10 l 275 110 c 151 60 281 110 288 110 c 8 0 62 -28 122 -62 l 108 -62 l 164 84 c 90 47 169 90 175 97 c 7 9 -7 44 -52 129 c -51 96 -60 118 -49 129 c 8 6 96 63 197 124 l 182 113 l 0 143 c 0 89 4 146 10 150 c 12 7 503 -256 918 -493 l 273 -155 l 121 -136 c 66 -75 133 -141 147 -147 c 14 -6 135 -30 267 -54 l 242 -43 l 382 219 l 382 219 l 86 100 c 47 55 263 272 480 483 l 395 383 l 51 -5 c 152 -16 242 -17 253 -4 c 6 7 92 152 192 321 l 181 309 l 56 216 l 57 216 l -38 209 c -31 172 -49 240 -101 390 c -62 176 -64 184 -63 277 c 1 52 4 138 8 190 l 6 95 l 95 123 l 95 122 l 67 -67 l 67 -67 l 3 -105 l 3 -106 l 59 2 c 32 1 82 7 110 13 c 51 10 52 11 114 109 c 34 54 62 105 62 113 c 0 8 -16 87 -35 174 l -35 159 l -94 95 l -95 95 l 46 109 l 45 110 l 153 159 c 143 149 164 175 305 393 c 120 185 157 234 174 234 c 11 0 106 5 210 10 c 131 7 192 14 198 23 c 4 6 8 79 8 162 l 1 150 l 247 276 l 247 277 l 56 128 c 48 110 58 144 68 229 c 7 55 14 119 17 142 l 6 42 l 238 57 l 238 57 l 160 123 l 159 123 l 188 253 c 103 139 189 254 190 256 c 1 1 60 9 131 18 c 190 23 174 5 174 184 c 0 99 3 149 10 145 c 6 -3 7 -17 4 -29 c -4 -16 0 -25 10 -29 c 18 -7 48 1 57 16 c 4 5 111 -25 250 -72 l 244 -81 l 188 -140 c 103 -77 187 -145 187 -152 c 0 -7 -21 -145 -46 -305 l -47 -293 l 60 -77 c 33 -43 103 -135 156 -204 c 53 -70 92 -130 88 -135 c -5 -5 -45 -127 -89 -271 l -81 -261 l 83 -284 c 46 -155 84 -288 86 -293 c 2 -6 -61 -138 -139 -295 c -138 -274 -152 -297 -366 -605 c -122 -176 -238 -344 -258 -374 c -29 -42 -63 -134 -163 -440 c -69 -212 -134 -393 -143 -402 c -9 -9 -81 -58 -161 -109 c -80 -51 -147 -94 -149 -96 c -9 -8 -91 -443 -91 -483 c 0 -25 11 -129 25 -231 c 14 -102 23 -191 20 -198 c -2 -7 -110 -160 -239 -340 l -234 -327 l -169 -69 c -92 -38 -173 -74 -179 -80 c -7 -6 -31 -76 -54 -156 c -24 -80 -46 -152 -51 -160 c -4 -9 -150 -187 -324 -395 l -316 -380 l 6 -205 c 3 -113 8 -237 11 -275 l 5 -70 l -135 -164 c -75 -90 -136 -166 -136 -170 c 0 -3 -12 -87 -27 -186 l -27 -180 l -75 -114 l -75 -113 l -26 -172 l -25 -171 l -360 -66 c -198 -36 -368 -69 -377 -74 c -17 -7 -18 22 -18 523 z"
+                transform="scale(0.04) rotate(5, 000, 000) translate(-1000, 12000)"
+                stroke="#d4d4d8"
+                stroke-width="2"
+                fill="#f4f4f5"
+              />
+                          
+              <!-- Miami highlight -->
+              <circle
+                cx="420"
+                cy="500"
+                r="30"
+                fill="#fde047"
+                fill-opacity="0.3"
+                stroke="#facc15"
+                stroke-width="2"
+              />
+              
+              <!-- Miami dot -->
+              <circle
+                cx="420"
+                cy="500"
+                r="8"
+                fill="#facc15"
+              />
+              
+              <!-- Miami label -->
+              <text x="420" y="550" text-anchor="middle" class="text-sm font-medium fill-current">
+                Miami
+              </text>
+              
+              <!-- Other cities -->
+              <g>
+                <!-- Tampa -->
+                <circle cx="275" cy="330" r="4" fill="#666" />
+                <text x="275" y="345" text-anchor="middle" font-size="12" fill="#666">
+                  Tampa
+                </text>
+                
+                <!-- Orlando -->
+                <circle cx="330" cy="275" r="4" fill="#666" />
+                <text x="330" y="290" text-anchor="middle" font-size="12" fill="#666">
+                  Orlando
+                </text>
+                
+                <!-- Jacksonville -->
+                <circle cx="315" cy="160" r="4" fill="#666" />
+                <text x="315" y="175" text-anchor="middle" font-size="12" fill="#666">
+                  Jacksonville
+                </text>
+                
+                <!-- Tallahassee -->
+                <circle cx="150" cy="150" r="4" fill="#666" />
+                <text x="150" y="165" text-anchor="middle" font-size="12" fill="#666">
+                  Tallahassee
+                </text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <!--<div class="scroll-indicator">
+        <svg class="scroll-indicator-arrow" viewBox="0 0 24 24">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </div>-->
+    </section>
+
+      <!-- PARTNERS SECTION START -->
+      <section id="partners" class="bg-muted">
+        <div class="container">
+          <h2 class="section-title">Our Partners</h2>
+          <p class="section-description">We collaborate with industry leaders to deliver exceptional construction projects.</p>
+          
+          <div class="partners-carousel-container">
+            <div class="partners-carousel">
+              <!-- Partner logos - these will be duplicated in the JavaScript for continuous scrolling -->
+              <div class="partner-logo">
+                <img src="img/flengineers.png" alt="Fine Lime Engineers">
+              </div>
+              <div class="partner-logo">
+                <img src="img/marchitects.png" alt="M-Architects">
+              </div>
+              <div class="partner-logo">
+                <img src="img/urban2.png" alt="Urban Group Contractors">
+              </div>
+              <div class="partner-logo">
+                <img src="img/fiallo.png" alt="PLF Estructural Engineers">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- PARTNERS SECTION END -->
+
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-description">Ready to start your construction project? Get in touch with our team to discuss your needs.</p>
+        
+        <div class="contact-grid">
+          <!-- Location -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg class="icon icon-lg" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <h3 class="contact-title">Our Location</h3>
+            <div class="contact-info">
+              <p>123 Construction Way</p>
+              <p>Miami, FL 33101</p>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg class="icon icon-lg" viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <h3 class="contact-title">Phone Number</h3>
+            <div class="contact-info">
+              <p>Main: (786) 753-7796</p>
+              <!--<p>Support: (305) 555-5678</p>-->
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg class="icon icon-lg" viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <h3 class="contact-title">Email Address</h3>
+            <div class="contact-info">
+              <p>info@teconllc.com</p>
+              <!--<p>support@teconllc.com</p>-->
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-button-container">
+          <a href="mailto:info@teconllc.com" class="button button-primary button-lg">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" style="margin-right: 0.5rem;">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Get In Touch
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <div class="footer-logo-square"></div>
+            <span class="footer-logo-text">TECON LLC</span>
+          </div>
+          <p class="footer-about">
+            Building excellence since [year]. Quality construction services for commercial, residential, and
+            industrial projects.
+          </p>
+        </div>
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#hero" class="footer-link">Home</a></li>
+            <li><a href="#projects" class="footer-link">Projects</a></li>
+            <li><a href="#about" class="footer-link">About</a></li>
+            <li><a href="#services" class="footer-link">Services</a></li>
+            <li><a href="#where-we-work" class="footer-link">Where We Work</a></li>
+            <li><a href="#contact" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Services</h3>
+          <ul class="footer-links">
+            <li><a href="#services" class="footer-link">Commercial Construction</a></li>
+            <li><a href="#services" class="footer-link">Residential Construction</a></li>
+            <li><a href="#services" class="footer-link">Industrial Construction</a></li>
+            <li><a href="#services" class="footer-link">Renovation & Remodeling</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Contact</h3>
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>123 Construction Way, Miami, FL 33101</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span>(786) 753-7796</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>info@teconllc.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2023 Tecon LLC. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Project data for slideshows - using only the main image for each project
+    // This will work even if the additional images don't exist yet
+    const projectData = {
+      sorrento: {
+        title: "Sorrento Villas Hotel",
+        location: "Miami Beach",
+        description: "A 3-story addition to a newly renovated hotel.",
+        images: [
+          { src: "img/sorrento1.jpg", caption: "Sorrento Villas Hotel" },
+          { src: "img/sorrento2.jpg", caption: "Sorrento Villas Hotel" },
+          { src: "img/sorrento3.jpg", caption: "Sorrento Villas Hotel" },
+          { src: "img/sorrento4.jpg", caption: "Sorrento Villas Hotel" }
+        ]
+      },
+      naples: {
+        title: "Residential Developments",
+        location: "Naples, FL",
+        description: "Residential units as an investment opportunity.",
+        images: [
+          { src: "img/naples1.jpg", caption: "Naples Residential Development" }
+        ]
+      },
+      bestwestern: {
+        title: "Best Western Doral",
+        location: "Doral, FL",
+        description: "Construction management.",
+        images: [
+          { src: "img/bestwestern1.jpg", caption: "Best Western Doral" },
+          { src: "img/bestwestern2.jpg", caption: "Best Western Doral" },
+          { src: "img/bestwestern3.jpg", caption: "Best Western Doral" }
+        ]
+      },      
+      wynwood: {
+        title: "Wynwood Complex",
+        location: "Aventura, FL",
+        description: "Commercial development for rent with high returns.",
+        images: [
+          { src: "img/wynwood1.jpg", caption: "Wynwood Complex" },
+          { src: "img/wynwood2.jpg", caption: "Wynwood Complex" },
+          { src: "img/wynwood3.jpg", caption: "Wynwood Complex" }
+        ]
+      },
+      balharbour: {
+        title: "Bal Harbour Development",
+        location: "Bal Harbour, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/balharbour1.jpg", caption: "Bal Harbour Development" },
+          { src: "img/balharbour2.jpg", caption: "Bal Harbour Development" },
+          { src: "img/balharbour3.jpg", caption: "Bal Harbour Development" }
+        ]
+      },
+      bella: {
+        title: "Bella condo",
+        location: "Sunny Isles Beach, FL",
+        description: "Construction management.",
+        images: [
+          { src: "img/bella1.jpg", caption: "Bal Harbour Development" },
+          { src: "img/bella2.jpg", caption: "Bal Harbour Development" },
+          { src: "img/bella3.jpg", caption: "Bal Harbour Development" }
+        ]
+      }, 
+      vanburen: {
+        title: "Bal Harbour Development",
+        location: "Bal Harbour, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/vanburen1.jpg", caption: "Bal Harbour Development" },
+          { src: "img/vanburen2.jpg", caption: "Bal Harbour Development" }
+        ]
+      },  
+      royalpalm: {
+        title: "327 Royal Palm",
+        location: "Boca Raton, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/royalpalm1.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm2.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm3.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm4.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm5.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm6.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm7.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm8.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm9.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm10.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm11.jpg", caption: "327 Royal Palm" }
+        ]
+      },
+      deerfield: {
+        title: "1900 Deerfield Beach",
+        location: "Deerfield Beach, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/deerfield1.jpg", caption: "1900 Deerfield Beach" },
+          { src: "img/deerfield2.jpg", caption: "1900 Deerfield Beach" },
+          { src: "img/deerfield3.jpg", caption: "1900 Deerfield Beach" }
+        ]
+      },
+      fordham: {
+        title: "The Fordham at Deerfield",
+        location: "Deerfield Beach, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/fordham1.jpg", caption: "The Fordham at Deerfield" },
+          { src: "img/fordham2.jpg", caption: "The Fordham at Deerfield" },
+          { src: "img/fordham3.jpg", caption: "The Fordham at Deerfield" },
+          { src: "img/fordham4.jpg", caption: "The Fordham at Deerfield" },
+          { src: "img/fordham5.jpg", caption: "The Fordham at Deerfield" },
+          { src: "img/fordham6.jpg", caption: "The Fordham at Deerfield" }
+        ]
+      },
+      townhousei: {
+        title: "Bayview Village Townhomes I",
+        location: "Fort Lauderdale, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/townhousei1.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei2.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei3.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei4.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei5.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei6.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei7.jpg", caption: "Bayview Village Townhomes I" }
+        ]
+      },
+      townhouseii: {
+        title: "Bayview Village Townhomes I",
+        location: "Fort Lauderdale, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/townhouseii1.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii2.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii3.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii4.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii5.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii6.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii7.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii8.jpg", caption: "Bayview Village Townhomes I" }
+        ]
+      },
+    };
+
+    // Debug function to help troubleshoot
+    function debug(message) {
+      console.log("DEBUG: " + message);
+    }
+
+    // Slideshow functionality
+    let currentSlideIndex = 0;
+    let currentProject = null;
+    
+    const modal = document.getElementById('slideshow-modal');
+    const slidesContainer = document.querySelector('.slideshow-slides');
+    const captionElement = document.querySelector('.slideshow-caption');
+    const dotsContainer = document.querySelector('.slideshow-dots');
+    const closeButton = document.querySelector('.close-modal');
+    const prevButton = document.querySelector('.slideshow-prev');
+    const nextButton = document.querySelector('.slideshow-next');
+    
+    debug("DOM elements initialized");
+    
+    // Open modal and initialize slideshow
+    function openSlideshow(projectId) {
+      debug("Opening slideshow for project: " + projectId);
+      
+      if (!projectData[projectId]) {
+        debug("Project data not found for: " + projectId);
+        return;
+      }
+      
+      currentProject = projectData[projectId];
+      currentSlideIndex = 0;
+      
+      // Clear previous slides and dots
+      slidesContainer.innerHTML = '';
+      dotsContainer.innerHTML = '';
+      
+      debug("Creating slides for project: " + projectId);
+      
+      // Create slides and dots
+      currentProject.images.forEach((image, index) => {
+        // Create slide
+        const slide = document.createElement('div');
+        slide.className = 'slideshow-slide';
+        slide.style.display = index === 0 ? 'block' : 'none';
+        
+        const img = document.createElement('img');
+        img.src = image.src;
+        img.alt = image.caption;
+        
+        // Add error handling for images
+        img.onerror = function() {
+          debug("Image failed to load: " + image.src);
+          this.src = "https://placehold.co/600x400?text=Image+Not+Found";
+        };
+        
+        slide.appendChild(img);
+        slidesContainer.appendChild(slide);
+        
+        // Create dot
+        const dot = document.createElement('span');
+        dot.className = 'slideshow-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => showSlide(index));
+        dotsContainer.appendChild(dot);
+      });
+      
+      // Set caption for first slide
+      captionElement.textContent = currentProject.images[0].caption;
+      
+      // Show modal
+      modal.style.display = 'flex';
+      debug("Modal displayed");
+      
+      // Prevent body scrolling when modal is open
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // Show specific slide
+    function showSlide(index) {
+      const slides = document.querySelectorAll('.slideshow-slide');
+      const dots = document.querySelectorAll('.slideshow-dot');
+      
+      if (slides.length === 0) {
+        debug("No slides found");
+        return;
+      }
+      
+      // Hide all slides
+      slides.forEach(slide => slide.style.display = 'none');
+      
+      // Remove active class from all dots
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      // Show current slide and activate current dot
+      slides[index].style.display = 'block';
+      if (dots[index]) dots[index].classList.add('active');
+      
+      // Update caption
+      captionElement.textContent = currentProject.images[index].caption;
+      
+      // Update current index
+      currentSlideIndex = index;
+    }
+    
+    // Next slide
+    function nextSlide() {
+      const slides = document.querySelectorAll('.slideshow-slide');
+      if (slides.length <= 1) return;
+      
+      const newIndex = (currentSlideIndex + 1) % slides.length;
+      showSlide(newIndex);
+    }
+    
+    // Previous slide
+    function prevSlide() {
+      const slides = document.querySelectorAll('.slideshow-slide');
+      if (slides.length <= 1) return;
+      
+      const newIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+      showSlide(newIndex);
+    }
+    
+    // Close modal
+    function closeModal() {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      debug("Modal closed");
+    }
+    
+    // Event listeners
+    if (closeButton) {
+      closeButton.addEventListener('click', closeModal);
+      debug("Close button event listener added");
+    }
+    
+    if (prevButton) {
+      prevButton.addEventListener('click', prevSlide);
+      debug("Prev button event listener added");
+    }
+    
+    if (nextButton) {
+      nextButton.addEventListener('click', nextSlide);
+      debug("Next button event listener added");
+    }
+    
+    // Close modal when clicking outside of content
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (modal.style.display === 'flex') {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'Escape') closeModal();
+      }
+    });
+    
+    debug("Setting up project card click handlers");
+    
+    // Add click event to project cards
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Don't trigger if clicking on the button
+        if (e.target.closest('.view-project')) return;
+        
+        const projectId = card.getAttribute('data-project');
+        debug("Project card clicked: " + projectId);
+        openSlideshow(projectId);
+      });
+    });
+    
+    // Add click event to view project buttons
+    document.querySelectorAll('.view-project').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent triggering the card click event
+        const projectId = e.target.closest('.project-card').getAttribute('data-project');
+        debug("View project button clicked: " + projectId);
+        openSlideshow(projectId);
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Update active nav dot based on scroll position
+    const sections = document.querySelectorAll('section, footer');
+    const navDots = document.querySelectorAll('.nav-dot');
+    
+    function updateActiveSection() {
+      let currentSectionIndex = 0;
+      
+      sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const scrollPosition = window.scrollY;
+        
+        if (scrollPosition >= sectionTop - window.innerHeight / 2) {
+          currentSectionIndex = index;
+        }
+      });
+      
+      navDots.forEach((dot, index) => {
+        if (index === currentSectionIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', updateActiveSection);
+    updateActiveSection();
+    
+    // Log when the script has fully loaded
+    debug("Script fully loaded");
+  </script>
+</body>
+</html>
+
