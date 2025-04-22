@@ -961,8 +961,9 @@ footer {
 
 .partners-carousel {
   display: flex;
-  animation: scrollPartners 10s linear infinite;
-  width: 80%;
+  animation: scrollPartners 30s linear infinite;
+  /**width: 80%;**/
+  width: max-content;
 }
 
 .partner-logo {
@@ -994,11 +995,8 @@ footer {
   0% {
     transform: translateX(0);
   }
-  50% {
-    transform: translateX(-20%);
-  }
   100% {
-    transform: translateX(0%);
+    transform: translateX(-50%);
   }
 }
 
