@@ -669,8 +669,9 @@ footer {
 .footer-logo-square {
   width: 1.5rem;
   height: 1.5rem;
-  background-color: #facc15;
+  /**background-color: #facc15;**/
   border-radius: 0.25rem;
+  background: url('img/logoblack.png') center/cover no-repeat
 }
 
 .footer-logo-text {
@@ -960,7 +961,7 @@ footer {
 
 .partners-carousel {
   display: flex;
-  animation: scrollPartners 30s linear infinite;
+  animation: scrollPartners 10s linear infinite;
   width: 80%;
 }
 
@@ -989,14 +990,17 @@ footer {
   object-fit: contain;
 }
 
-/*@keyframes scrollPartners {
+@keyframes scrollPartners {
   0% {
     transform: translateX(0);
   }
-  100% {
-    transform: translateX(-50%);
+  50% {
+    transform: translateX(-20%);
   }
-}*/
+  100% {
+    transform: translateX(0%);
+  }
+}
 
 /* Pause animation on hover */
 .partners-carousel-container:hover .partners-carousel {
