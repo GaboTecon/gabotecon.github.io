@@ -1,595 +1,1237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabo Zubini | Arquitecto</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style20230405.css">
-    <link rel="stylesheet" href="normalize.css">    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <style>
-      html {
-        scroll-snap-type: y mandatory;
-        overflow-y: scroll;
-        height: 100%;
-        scroll-behavior: smooth;
-      }
-
-      body {
-        font-family: 'Barlow', sans-serif;
-        font-weight: 300;
-        height: 100%;
-      }
-
-      /* Header fills viewport and snaps */
-      .site-header {
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-        height: 100vh !important;
-      }
-
-      /* Main snaps into view on first scroll */
-      main {
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-      }
-
-      /* ── WORKLIST STYLES ── */
-      :root {
-        --wl-white: #ffffff;
-        --wl-black: #111111;
-        --wl-grey: #888;
-        --wl-light: #f5f5f3;
-        --wl-transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-
-      .filter-bar {
-        padding: 28px 40px 20px;
-        display: flex;
-        gap: 24px;
-        flex-wrap: wrap;
-        border-bottom: 1px solid #e8e8e8;
-        border-top: 1px solid #e8e8e8;
-      }
-
-      .filter-btn {
-        font-family: 'Barlow', sans-serif;
-        font-size: 0.68rem;
-        font-weight: 400;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: var(--wl-grey);
-        padding: 4px 0;
-        border-bottom: 1px solid transparent;
-        transition: all 0.2s;
-      }
-
-      .filter-btn:hover,
-      .filter-btn.active {
-        color: var(--wl-black);
-        border-bottom-color: var(--wl-black);
-      }
-
-      .worklist {
-        padding: 40px;
-        columns: 3;
-        column-gap: 20px;
-      }
-
-      @media (max-width: 1100px) { .worklist { columns: 2; } }
-      @media (max-width: 640px)  { .worklist { columns: 1; padding: 20px; } }
-
-      .work-item {
-        break-inside: avoid;
-        margin-bottom: 20px;
-        cursor: pointer;
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        opacity: 0;
-        transform: translateY(20px);
-        animation: wlFadeUp 0.6s var(--wl-transition) forwards;
-      }
-
-      .work-item:nth-child(1)  { animation-delay: 0.05s; }
-      .work-item:nth-child(2)  { animation-delay: 0.10s; }
-      .work-item:nth-child(3)  { animation-delay: 0.15s; }
-      .work-item:nth-child(4)  { animation-delay: 0.20s; }
-      .work-item:nth-child(5)  { animation-delay: 0.25s; }
-      .work-item:nth-child(6)  { animation-delay: 0.30s; }
-      .work-item:nth-child(7)  { animation-delay: 0.35s; }
-      .work-item:nth-child(8)  { animation-delay: 0.40s; }
-      .work-item:nth-child(9)  { animation-delay: 0.45s; }
-      .work-item:nth-child(10) { animation-delay: 0.50s; }
-      .work-item:nth-child(11) { animation-delay: 0.55s; }
-      .work-item:nth-child(12) { animation-delay: 0.60s; }
-
-      @keyframes wlFadeUp {
-        to { opacity: 1; transform: translateY(0); }
-      }
-
-      .work-item.hidden { display: none; }
-
-      .img-wrap {
-        width: 100%;
-        overflow: hidden;
-        background: var(--wl-light);
-      }
-
-      .img-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.7s var(--wl-transition), filter 0.7s;
-        filter: brightness(0.97);
-      }
-
-      .work-item:hover .img-wrap img {
-        transform: scale(1.03);
-        filter: brightness(1);
-      }
-
-      .work-meta { padding: 10px 0 4px; }
-
-      .work-category {
-        font-size: 1.2rem;
-        letter-spacing: 0.10em;
-        text-transform: uppercase;
-        color: var(--wl-grey);
-        margin-bottom: 4px;
-        font-family: 'Barlow', sans-serif;
-        font-weight: 300;
-      }
-
-      .work-title {
-        font-family: 'Barlow', sans-serif;
-        font-weight: 300;
-        font-size: 2.5rem;
-        letter-spacing: -0.5px;
-        color: var(--wl-black);
-        transition: opacity 0.2s;
-      }
-
-      .work-item:hover .work-title { opacity: 0.5; }
-
-      /* ══════════════════════════════════════
-         SLIDESHOW OVERLAY
-      ══════════════════════════════════════ */
-      .slideshow-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: #0d0d0d;
-        z-index: 2000;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      .slideshow-overlay.open { display: flex; }
-
-      /* Top bar */
-      .ss-topbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px 36px;
-        flex-shrink: 0;
-      }
-
-      .ss-project-info {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-      }
-
-      .ss-category {
-        font-family: 'Barlow', sans-serif;
-        font-size: 0.65rem;
-        font-weight: 400;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: #666;
-      }
-
-      .ss-title {
-        font-family: 'Barlow', sans-serif;
-        font-size: 1.1rem;
-        font-weight: 300;
-        letter-spacing: 0.04em;
-        color: #fff;
-      }
-
-      .ss-counter {
-        font-family: 'Barlow', sans-serif;
-        font-size: 0.72rem;
-        font-weight: 300;
-        letter-spacing: 0.1em;
-        color: #555;
-      }
-
-      .ss-close {
-        font-family: 'Barlow', sans-serif;
-        font-size: 0.65rem;
-        font-weight: 400;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: #666;
-        cursor: pointer;
-        transition: color 0.2s;
-        background: none;
-        border: none;
-        padding: 0;
-      }
-      .ss-close:hover { color: #fff; }
-
-      /* Main image area */
-      .ss-stage {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-        padding: 0 80px;
-      }
-
-      .ss-img-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .ss-img-container img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-        opacity: 0;
-        transition: opacity 0.35s ease;
-        display: block;
-      }
-      .ss-img-container img.loaded { opacity: 1; }
-
-      /* Arrows */
-      .ss-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: #444;
-        font-size: 1.6rem;
-        padding: 16px;
-        transition: color 0.2s;
-        z-index: 10;
-        line-height: 1;
-      }
-      .ss-arrow:hover { color: #fff; }
-      .ss-arrow.prev { left: 8px; }
-      .ss-arrow.next { right: 8px; }
-      .ss-arrow:disabled { opacity: 0.15; cursor: default; }
-
-      /* bottom padding for stage */
-      .ss-stage { padding-bottom: 24px; }
-
-      @media (max-width: 640px) {
-        .ss-stage { padding: 0 50px; }
-        .ss-arrow { font-size: 1.1rem; padding: 10px; }
-        .ss-thumb { width: 48px; height: 34px; }
-        .ss-topbar { padding: 14px 20px; }
-      }
-      /* ── SCROLL HINT ── */
-      .scroll-hint {
-        position: absolute;
-        bottom: 36px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        opacity: 1;
-        transition: opacity 0.6s ease;
-        cursor: pointer;
-        z-index: 10;
-      }
-      .scroll-hint.hidden { opacity: 0; pointer-events: none; }
-      .scroll-hint span {
-        display: block;
-        width: 1px;
-        height: 52px;
-        background: rgba(255,255,255,0.25);
-        position: relative;
-        overflow: hidden;
-      }
-      .scroll-hint span::after {
-        content: '';
-        position: absolute;
-        top: -100%;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255,255,255,0.9);
-        animation: scrollLine 1.8s ease-in-out infinite;
-      }
-      @keyframes scrollLine {
-        0%   { top: -100%; }
-        100% { top: 100%; }
-      }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tecon LLC - Construction Services</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="site-header">
-        <video autoplay muted loop id="videoheader">
-            <source src="image/header.mp4" type="video/mp4">
-        </video>
-
-        <div class="barra">
-            <div class="navegacion">
-                <a href="index.html">ESP</a>
-                <p>|</p>
-                <a href="indexeng.html">ENG</a>
-            </div>
+  <!-- Slideshow Modal -->
+  <div id="slideshow-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="slideshow-container">
+        <div class="slideshow-slides">
+          <!-- Slides will be inserted here dynamically -->
         </div>
-
-        <div class="texto-header">
-            <h1>Gabo <span>Zubini</span></h1>
-            <h4>Arquitecto</h4>
-        </div>
-
-        <div class="scroll-hint" id="scrollHint">
-            <span></span>
-        </div>
-    </header>
-
-    <main>
-        <div class="contenedor">
-
-            <!-- WORKLIST MASONRY GRID
-                 ─────────────────────────────────────────────────────────────────
-                 For each project, set:
-                   data-title    = project name shown in slideshow header
-                   data-label    = subtitle/category shown in slideshow header
-                   data-category = used for filter (residencial / comercial / urbano)
-                   data-images   = comma-separated list of image paths for the slideshow
-                 The cover <img src="..."> should be the same as the first image in data-images
-                 ─────────────────────────────────────────────────────────────────  -->
-            <div class="worklist" id="worklist">
-
-                <!-- CORBETA SOMELLERA -->
-                <a class="work-item"
-                   data-category="residencial"
-                   data-title="CORBETA SOMELLERA"
-                   data-label="Residencial"
-                   data-images="image/SOM1.jpg,image/SOM2.jpg,image/SOM3.jpg,image/SOM4.png,image/SOM5.png,image/SOM6.jpg"
-                   href="#">
-                    <div class="img-wrap" style="aspect-ratio:3/2">
-                        <img src="image/SOM1.jpg" alt="Corbeta Somellera">
-                    </div>
-                    <div class="work-meta">
-                        <div class="work-category">Residencial</div>
-                        <div class="work-title">CORBETA SOMELLERA</div>
-                    </div>
-                </a>
-
-                <!-- SORRENTO VILLAS -->
-                <a class="work-item"
-                   data-category="comercial"
-                   data-title="SORRENTO VILLAS"
-                   data-label="En colaboración con Urban Group Architects"
-                   data-images="image/sorrento1.jpg,image/sorrento2.jpg,image/sorrento3.jpg,image/sorrento4.jpg,image/sorrento5.jpg"
-                   href="#">
-                    <div class="img-wrap" style="aspect-ratio:3/4">
-                        <img src="image/sorrento1.jpg" alt="Sorrento Villas">
-                    </div>
-                    <div class="work-meta">
-                        <div class="work-category">En colaboración con Urban Group Architects</div>
-                        <div class="work-title">SORRENTO VILLAS</div>
-                    </div>
-                </a>
-
-                <!-- MATEO II -->
-                <a class="work-item"
-                   data-category="residencial"
-                   data-title="MATEO II"
-                   data-label="En colaboración con Urban Group Architects"
-                   data-images="image/mat1.png,image/mat2.jpg,image/mat3.png,image/mat4.png"
-                   href="#">
-                    <div class="img-wrap" style="aspect-ratio:1/1">
-                        <img src="image/MAT1.png" alt="Mateo II">
-                    </div>
-                    <div class="work-meta">
-                        <div class="work-category">En colaboración con Urban Group Architects</div>
-                        <div class="work-title">MATEO II</div>
-                    </div>
-                </a>
-
-
-                <!-- RENDERS -->
-                <a class="work-item"
-                   data-category="residencial"
-                   data-title="PROYECTOS VARIOS"
-                   data-label="Representación digital"
-                   data-images="image/render1.jpg,image/render2.jpg,image/render3.jpg,image/render4.jpg,image/render5.jpg"
-                   href="#">
-                    <div class="img-wrap" style="aspect-ratio:1/1">
-                        <img src="image/render1.jpg" alt="Mateo II">
-                    </div>
-                    <div class="work-meta">
-                        <div class="work-category">Representación digital</div>
-                        <div class="work-title">PROYECTOS VARIOS</div>
-                    </div>
-                </a>
-
-
-                <!-- DOCIMENTACION -->
-                <a class="work-item"
-                   data-category="residencial"
-                   data-title="DIGITAL TWIN"
-                   data-label="Documentación BIM"
-                   data-images="image/abim1.jpg,image/abim2.jpg,image/abim3.jpg,image/abim4.jpg,image/abim5.jpg,image/abim6.jpg,image/abim7.jpg"
-                   href="#">
-                    <div class="img-wrap" style="aspect-ratio:1/1">
-                        <img src="image/ABIM1.jpg" alt="Mateo II">
-                    </div>
-                    <div class="work-meta">
-                        <div class="work-category">Documentación BIM</div>
-                        <div class="work-title">DIGITAL TWIN</div>
-                    </div>
-                </a>
-                <!-- ── ADD MORE PROJECTS HERE ──
-                     Just update data-images with the numbered files for that project
-                <a class="work-item"
-                   data-category="residencial"
-                   data-title="NOMBRE PROYECTO"
-                   data-label="Categoría o colaboración"
-                   data-images="image/11.jpg,image/12.jpg,image/13.jpg"
-                   href="#">
-                    <div class="img-wrap" style="aspect-ratio:3/2">
-                        <img src="image/11.jpg" alt="Nombre Proyecto">
-                    </div>
-                    <div class="work-meta">
-                        <div class="work-category">Residencial</div>
-                        <div class="work-title">NOMBRE PROYECTO</div>
-                    </div>
-                </a>
-                ── -->
-
-            </div>
-            <!-- FIN WORKLIST -->
-
-        </div>
-
-        <!-- CV / SOBRE MI -->
-        <div class="cv">
-            <div class="contenedor">
-                <div class="sobremi">
-                    <div class="sidebar centrar-texto">
-                        <h1>Sobre mi.</h1>
-                        <div class="redes">
-                            <a href="https://www.linkedin.com/in/gabrielzubini/" class="fa fa-linkedin"></a>
-                            <a href="/cdn-cgi/l/email-protection#294e484b5b404c45535c4b404740694e44484045074a4644" class="fa fa-envelope-o"></a>
-                        </div>
-                    </div>
-                    <div class="resumen centrar-texto">
-                        <p>Mi nombre es Gabriel, soy de Buenos Aires, padre de una hermosa hija. Soy arquitecto graduado de la FADU - UBA, postgrado en BIM. Empecé con la visualización arquitectónica en la secundaria como hobby y con el tiempo me fui perfeccionando.</p>
-                        <p>Tengo más de una década de experiencia en AutoCAD y Revit. Luego de ser freelancer durante la carrera, trabajé como jefe de obra en obras públicas en todo el AMBA. </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- ══ SLIDESHOW OVERLAY ══ -->
-    <div class="slideshow-overlay" id="ssOverlay">
-        <div class="ss-topbar">
-            <div class="ss-project-info">
-                <span class="ss-category" id="ssCategory"></span>
-                <span class="ss-title" id="ssTitle"></span>
-            </div>
-            <span class="ss-counter" id="ssCounter"></span>
-            <button class="ss-close" id="ssClose">Cerrar ✕</button>
-        </div>
-
-        <div class="ss-stage">
-            <button class="ss-arrow prev" id="ssPrev">&#8592;</button>
-            <div class="ss-img-container">
-                <img id="ssMainImg" src="" alt="">
-            </div>
-            <button class="ss-arrow next" id="ssNext">&#8594;</button>
-        </div>
-
-
+        <button class="slideshow-prev">&#10094;</button>
+        <button class="slideshow-next">&#10095;</button>
+      </div>
+      <div class="slideshow-caption"></div>
+      <div class="slideshow-dots">
+        <!-- Dots will be inserted here dynamically -->
+      </div>
     </div>
+  </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script>
-        const overlay    = document.getElementById('ssOverlay');
-        const mainImg    = document.getElementById('ssMainImg');
-        const titleEl    = document.getElementById('ssTitle');
-        const categoryEl = document.getElementById('ssCategory');
-        const counterEl  = document.getElementById('ssCounter');
+  <!-- Navigation Dots -->
+  <div class="nav-dots">
+    <a href="#hero" class="nav-dot active"></a>
+    <a href="#projects" class="nav-dot"></a>
+    <a href="#about" class="nav-dot"></a>
+    <a href="#services" class="nav-dot"></a>
+    <!--<a href="#where-we-work" class="nav-dot"></a>-->
+    <a href="#partners" class="nav-dot"></a>
+    <a href="#contact" class="nav-dot"></a>
+    <a href="#footer" class="nav-dot"></a>
+  </div>
 
-        const btnPrev    = document.getElementById('ssPrev');
-        const btnNext    = document.getElementById('ssNext');
-        const btnClose   = document.getElementById('ssClose');
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <div class="logo-square"></div>
+          <span class="logo-text">TECON LLC</span>
+        </a>
+        <nav>
+          <a href="#hero">Home</a>
+          <a href="#projects">Projects</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <!--<a href="#where-we-work">Where We Work</a>-->
+          <a href="#partners">Partners</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="button button-primary" style="display: none;">Get a Quote</button>
+        <!--<button class="mobile-menu-button">
+          <svg class="icon" viewBox="0 0 24 24">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
+        </button>-->
+      </div>
+    </div>
+  </header>
 
-        let images  = [];
-        let current = 0;
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="hero-bg"></div>
+      <div class="container">
+        <div class="hero-content">
+          <h1>Building Excellence, <br class="hidden-mobile">Constructing Trust</h1>
+          <p>Tecon LLC delivers exceptional construction management services with precision, quality, and innovation.</p>
+          <div class="hero-buttons">
+            <a href="#projects" class="button button-primary button-lg">
+              Our Projects
+              <svg class="icon icon-sm" viewBox="0 0 24 24" style="margin-left: 0.25rem;">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#contact" class="button button-outline button-lg">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      <!--<div class="scroll-indicator">
+        <span class="scroll-indicator-text">Scroll Down</span>
+        <svg class="scroll-indicator-arrow" viewBox="0 0 24 24">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </div>-->
+    </section>
 
-        function openSlideshow(item) {
-            images  = item.dataset.images.split(',').map(s => s.trim());
-            current = 0;
-            titleEl.textContent    = item.dataset.title || '';
-            categoryEl.textContent = item.dataset.label || item.dataset.category || '';
-            showSlide(0);
-            overlay.classList.add('open');
-            document.body.style.overflow = 'hidden';
+    <!-- Projects Section -->
+    <section id="projects" class="bg-muted">
+      <div class="container">
+        <h2 class="section-title">Our Projects</h2>
+        <p class="section-description">Explore our portfolio of successful construction projects delivered with excellence.</p>
+        
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card" data-project="sorrento">
+            <div class="project-image">
+              <img src="img/sorrento1.jpg" alt="Sorrento Villas Hotel">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Sorrento Villas Hotel</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Miami Beach</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>est. 2025</span>
+              </div>
+              <p class="project-description">A 3-story addition to a newly renovated hotel.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="project-card" data-project="bestwestern">
+            <div class="project-image">
+              <img src="img/bestwestern1.jpg" alt="Best Western Doral">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Best Western Doral</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Doral, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>[YEAR]</span>
+              </div>
+              <p class="project-description">Construction management in Doral, Florida.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="project-card" data-project="wynwood">
+            <div class="project-image">
+              <img src="img/wynwood1.jpg" alt="Hospital Expansion">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Wynwood complex</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Wynwood, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>2026 est.</span>
+              </div>
+              <p class="project-description">Commercial development for rent with high returns.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="project-card" data-project="balharbour">
+            <div class="project-image">
+              <img src="img/balharbour1.jpg" alt="Bal Harbour">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Bal Harbour Residences</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Bal Harbour, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span>2026 est.</span>
+              </div>
+              <p class="project-description">Development advisory for luxury tower.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div class="project-card" data-project="bella">
+            <div class="project-image">
+              <img src="img/bella1.jpg" alt="Bella condominiums">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Bella condominiums</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span> Sunny Isles Beach, FL </span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span></span>
+              </div>
+              <p class="project-description">Construction management at Sunny Isles Beach.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>          
+
+          <!-- Project 6 -->
+          <div class="project-card" data-project="vanburen">
+            <div class="project-image">
+              <img src="img/vanburen1.jpg" alt="Van ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Van Buren ST</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Hollywood, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span></span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+         
+          <!-- Project 7 -->
+          <div class="project-card" data-project="royalpalm">
+            <div class="project-image">
+              <img src="img/royalpalm1.jpg" alt="327 Royal Palm ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">327 Royal Palm</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Boca Raton, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span></span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 8 -->
+          <div class="project-card" data-project="deerfield">
+            <div class="project-image">
+              <img src="img/deerfield1.jpg" alt="Van ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">1900 Deerfield Beach</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Deerfield Beach, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span></span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 9 -->
+          <div class="project-card" data-project="fordham">
+            <div class="project-image">
+              <img src="img/fordham1.jpg" alt="Van ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">The Fordham at Deerfield</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Deerfield Beach, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span></span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 10 -->
+          <div class="project-card" data-project="townhousei">
+            <div class="project-image">
+              <img src="img/townhousei1.jpg" alt="Van ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Bayview Village Townhomes I</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Fort Lauderdale, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span></span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+
+          <!-- Project 11 -->
+          <div class="project-card" data-project="townhouseii">
+            <div class="project-image">
+              <img src="img/townhouseii1.jpg" alt="Van ">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Bayview Village Townhomes I</h3>
+              <div class="project-meta">
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Fort Lauderdale, FL</span>
+                <span style="margin: 0 0.5rem;">•</span>
+                <span></span>
+              </div>
+              <p class="project-description">Development advisory for residential complex.</p>
+            </div>
+            <div class="project-footer">
+              <button class="button button-outline view-project" style="width: 100%;">View Project Details</button>
+            </div>
+          </div>
+          <!--projects end-->
+        </div>
+      </div>
+      <!--<div class="scroll-indicator">
+        <svg class="scroll-indicator-arrow" viewBox="0 0 24 24">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </div>-->
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-content">
+            <h2 class="about-title">About Tecon LLC</h2>
+            <p class="about-text">
+              <b>Tecon LLC</b> is a multidisciplinary real estate development management firm, delivering comprehensive, forward-thinking, and high-performance solutions throughout every stage of the development lifecycle. With over 30 years of proven experience in architecture, construction, and strategic planning, we empower developers, investors, and partners with expert feasibility studies, advanced conceptual design, regulatory compliance management, entitlement coordination and seamless construction execution.
+            </p>
+            <p class="about-text">
+              Based in Florida, our firm specializes in maximizing buildable potential across diverse project types, always ensuring alignment with local regulations and market realities. As part of our commitment to innovation, we incorporate adaptive AI-driven reporting systems that provide real-time, transparent project tracking to all stakeholders—enhancing clarity, efficiency, and trust.
+            </p>
+            
+            <div>
+              <h3 class="values-title">Our Values and Commitment</h3>
+              <p class="about-text">
+                At Tecon LLC, we are driven by:
+              </p>
+              <ul class="values-list">
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Integrity in every commitment</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Transparency in every process</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Excellence in execution</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Innovation through adaptive technologies</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Collaboration with trusted experts</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Accountability across every stage</span>
+                </li>
+              </ul>
+            </div>
+            <p class="about-text">
+              We uphold these values to ensure a professional, high-performance experience for every client, city partner, and stakeholder.
+            </p>
+
+            <div>
+              <h3 class="values-title">What Sets Us Apart</h3>
+              <p class="about-text">
+                At Tecon LLC, we are driven by:
+              </p>
+              <ul class="values-list">
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>30+ years of elite architecture & construction experience</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Fully integrated service offering: from feasibility to final build</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>AI-powered reporting & stakeholder communication systems</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Deep knowledge of Florida’s zoning & city-specific permitting processes</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>Flexible development models: from consultant to equity partner</span>
+                </li>
+                <li class="value-item">
+                  <div class="value-dot"></div>
+                  <span>High-end project specialization with consistent results</span>
+                </li>
+              </ul>  
+
+            </div>
+            <!--<div>
+              <a href="#about" class="button button-outline">Learn More About Us</a>
+            </div>-->
+          </div>
+          <div class="about-image">
+            <img src="img/logo.svg" alt="Tecon LLC team">
+          </div>
+        </div>
+      </div>
+      <!--<div class="scroll-indicator">
+        <svg class="scroll-indicator-arrow" viewBox="0 0 24 24">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </div>-->
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="bg-muted">
+      <div class="container">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-description">Comprehensive construction solutions tailored to your specific needs.</p>
+        
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+                <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Feasibility & Development Potential Analysis</h3>
+            <p class="service-description">We conduct comprehensive volumetric and zoning studies to identify the maximum allowable square footage, residential units, hotel keys, or mixed-use opportunities. These analyses provide a clear foundation for design and investment strategies.</p>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Advanced Conceptual Design</h3>
+            <p class="service-description">Tecon LLC offers cutting-edge conceptual design services tailored to project goals, client vision, and site constraints. Our approach fuses design intelligence with market sensibility to guide the architectural strategy forward.</p>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Entitlement & Documentation Coordination</h3>
+            <p class="service-description">We manage the full coordination of construction documentation required for city submissions and permitting across Florida. We collaborate with city-recognized architects and engineers—selected by the client or from our strategic network.</p>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Construction Management & Execution</h3>
+            <p class="service-description">From pre-construction to delivery, we oversee the construction process, ensuring timelines, budgets, and quality standards are met. Our extensive construction background ensures excellence from groundbreaking to final inspection.</p>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+<circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Strategic Development Partnerships</h3>
+            <p class="service-description">Tecon LLC acts as a development partner, offering strategic advisory with or without capital participation. We align with our partners' visions and investment goals to enhance project performance and market value.</p>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <h3 class="service-title">AI-Enhanced Project Reporting</h3>
+            <p class="service-description">Every stakeholder—whether a direct client, investor, city inspector, or contractor—receives real-time progress insights. We leverage adaptive artificial intelligence systems that document and narrate each project’s process in accessible, accurate formats.</p>
+          </div>
+
+          <!-- Service 7 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Owner’s Representation</h3>
+            <p class="service-description">We act as the Owner’s Representative, safeguarding our client’s interests throughout the development process. From design decisions to construction milestones, we ensure quality, accountability, and strategic alignment on behalf of the ownership team.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where We Work Section 
+    <section id="where-we-work">
+      <div class="container">
+        <h2 class="section-title">Where We Work</h2>
+        <p class="section-description">Serving the greater Miami area with quality construction services.</p>
+        
+        <div class="where-we-work-grid">
+          <div>
+            <h3 class="locations-title">Miami and Surrounding Areas</h3>
+            <p class="locations-text">
+              Tecon LLC is proud to serve Miami and the surrounding areas in South Florida. Our team has extensive
+              experience working throughout the region, delivering exceptional construction projects to clients in:
+            </p>
+            <ul class="locations-grid">
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Downtown Miami</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Brickell</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Miami Beach</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Coral Gables</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Doral</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Hialeah</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>Fort Lauderdale</span>
+              </li>
+              <li class="location-item">
+                <div class="location-dot"></div>
+                <span>West Palm Beach</span>
+              </li>
+            </ul>
+            <p class="locations-text" style="margin-top: 1.5rem;">
+              Our local expertise allows us to navigate the unique building requirements, regulations, and
+              environmental considerations specific to South Florida construction.
+            </p>
+          </div>
+          <div class="map-container">
+            <svg class="florida-map" viewBox="0 0 400 600" width="600" height="600">
+              <!-- Florida outline 
+              <path
+                d="M 8540 -9192 c 0 309 -4 533 -9 536 c -5 4 -104 -91 -220 -211 l -210 -217 l -381 18 c -209 9 -568 25 -797 36 c -913 42 -1326 61 -1963 90 c -366 16 -695 32 -732 35 c -79 6 -63 20 -218 -203 c -120 -174 -95 -161 -277 -142 c -54 6 -339 33 -633 60 c -510 48 -1009 95 -1700 160 c -173 16 -508 48 -745 70 c -552 51 -605 57 -609 61 c -2 2 -9 78 -15 169 c -6 91 -16 193 -22 228 c -8 42 -8 66 -1 75 c 5 6 60 120 121 252 c 62 132 116 242 120 245 c 5 3 84 1 175 -4 l 167 -9 l 75 -104 l 76 -103 l 152 0 l 152 0 l 144 85 c 79 47 148 85 152 85 c 5 0 133 -56 284 -125 c 151 -69 282 -125 290 -125 c 11 0 14 22 14 115 c 0 103 2 115 18 115 c 9 0 79 5 154 10 l 138 10 l 275 110 c 151 60 281 110 288 110 c 8 0 62 -28 122 -62 l 108 -62 l 164 84 c 90 47 169 90 175 97 c 7 9 -7 44 -52 129 c -51 96 -60 118 -49 129 c 8 6 96 63 197 124 l 182 113 l 0 143 c 0 89 4 146 10 150 c 12 7 503 -256 918 -493 l 273 -155 l 121 -136 c 66 -75 133 -141 147 -147 c 14 -6 135 -30 267 -54 l 242 -43 l 382 219 l 382 219 l 86 100 c 47 55 263 272 480 483 l 395 383 l 51 -5 c 152 -16 242 -17 253 -4 c 6 7 92 152 192 321 l 181 309 l 56 216 l 57 216 l -38 209 c -31 172 -49 240 -101 390 c -62 176 -64 184 -63 277 c 1 52 4 138 8 190 l 6 95 l 95 123 l 95 122 l 67 -67 l 67 -67 l 3 -105 l 3 -106 l 59 2 c 32 1 82 7 110 13 c 51 10 52 11 114 109 c 34 54 62 105 62 113 c 0 8 -16 87 -35 174 l -35 159 l -94 95 l -95 95 l 46 109 l 45 110 l 153 159 c 143 149 164 175 305 393 c 120 185 157 234 174 234 c 11 0 106 5 210 10 c 131 7 192 14 198 23 c 4 6 8 79 8 162 l 1 150 l 247 276 l 247 277 l 56 128 c 48 110 58 144 68 229 c 7 55 14 119 17 142 l 6 42 l 238 57 l 238 57 l 160 123 l 159 123 l 188 253 c 103 139 189 254 190 256 c 1 1 60 9 131 18 c 190 23 174 5 174 184 c 0 99 3 149 10 145 c 6 -3 7 -17 4 -29 c -4 -16 0 -25 10 -29 c 18 -7 48 1 57 16 c 4 5 111 -25 250 -72 l 244 -81 l 188 -140 c 103 -77 187 -145 187 -152 c 0 -7 -21 -145 -46 -305 l -47 -293 l 60 -77 c 33 -43 103 -135 156 -204 c 53 -70 92 -130 88 -135 c -5 -5 -45 -127 -89 -271 l -81 -261 l 83 -284 c 46 -155 84 -288 86 -293 c 2 -6 -61 -138 -139 -295 c -138 -274 -152 -297 -366 -605 c -122 -176 -238 -344 -258 -374 c -29 -42 -63 -134 -163 -440 c -69 -212 -134 -393 -143 -402 c -9 -9 -81 -58 -161 -109 c -80 -51 -147 -94 -149 -96 c -9 -8 -91 -443 -91 -483 c 0 -25 11 -129 25 -231 c 14 -102 23 -191 20 -198 c -2 -7 -110 -160 -239 -340 l -234 -327 l -169 -69 c -92 -38 -173 -74 -179 -80 c -7 -6 -31 -76 -54 -156 c -24 -80 -46 -152 -51 -160 c -4 -9 -150 -187 -324 -395 l -316 -380 l 6 -205 c 3 -113 8 -237 11 -275 l 5 -70 l -135 -164 c -75 -90 -136 -166 -136 -170 c 0 -3 -12 -87 -27 -186 l -27 -180 l -75 -114 l -75 -113 l -26 -172 l -25 -171 l -360 -66 c -198 -36 -368 -69 -377 -74 c -17 -7 -18 22 -18 523 z"
+                transform="scale(0.04) rotate(5, 000, 000) translate(-1000, 12000)"
+                stroke="#d4d4d8"
+                stroke-width="2"
+                fill="#f4f4f5"
+              />
+                          
+               <!--Miami highlight 
+              <circle
+                cx="420"
+                cy="500"
+                r="30"
+                fill="#fde047"
+                fill-opacity="0.3"
+                stroke="#facc15"
+                stroke-width="2"
+              />
+              
+               <!--Miami dot 
+              <circle
+                cx="420"
+                cy="500"
+                r="8"
+                fill="#facc15"
+              />
+              
+               <!--Miami label 
+              <text x="420" y="550" text-anchor="middle" class="text-sm font-medium fill-current">
+                Miami
+              </text>
+              
+               <!--Other cities 
+              <g>
+                 <!--Tampa 
+                <circle cx="275" cy="330" r="4" fill="#666" />
+                <text x="275" y="345" text-anchor="middle" font-size="12" fill="#666">
+                  Tampa
+                </text>
+                
+                 <!--Orlando 
+                <circle cx="330" cy="275" r="4" fill="#666" />
+                <text x="330" y="290" text-anchor="middle" font-size="12" fill="#666">
+                  Orlando
+                </text>
+                
+                 <!--Jacksonville 
+                <circle cx="315" cy="160" r="4" fill="#666" />
+                <text x="315" y="175" text-anchor="middle" font-size="12" fill="#666">
+                  Jacksonville
+                </text>
+                
+                 <!--Tallahassee 
+                <circle cx="150" cy="150" r="4" fill="#666" />
+                <text x="150" y="165" text-anchor="middle" font-size="12" fill="#666">
+                  Tallahassee
+                </text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <!--<div class="scroll-indicator">
+        <svg class="scroll-indicator-arrow" viewBox="0 0 24 24">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </div>
+    </section>-->
+
+      <!-- PARTNERS SECTION START -->
+      <section id="partners">
+        <div class="container">
+          <h2 class="section-title">Our Partners</h2>
+          <p class="section-description">We collaborate with industry leaders to deliver exceptional construction projects.</p>
+          
+          <div class="partners-carousel-container">
+            <div class="partners-carousel">
+              <!-- Partner logos - these will be duplicated in the JavaScript for continuous scrolling -->
+              <div class="partner-logo">
+                <img src="img/flengineers.png" alt="Fine Lime Engineers">
+              </div>
+              <div class="partner-logo">
+                <img src="img/marchitects.png" alt="M-Architects">
+              </div>
+              <div class="partner-logo">
+                <img src="img/urban2.png" alt="Urban Group Contractors">
+              </div>
+              <div class="partner-logo">
+                <img src="img/fiallo.png" alt="PLF Estructural Engineers">
+              </div>
+              <!--duplicate because js not working properly fml-->
+              <div class="partner-logo">
+                <img src="img/flengineers.png" alt="Fine Lime Engineers">
+              </div>
+              <div class="partner-logo">
+                <img src="img/marchitects.png" alt="M-Architects">
+              </div>
+              <div class="partner-logo">
+                <img src="img/urban2.png" alt="Urban Group Contractors">
+              </div>
+              <div class="partner-logo">
+                <img src="img/fiallo.png" alt="PLF Estructural Engineers">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- PARTNERS SECTION END -->
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-muted">
+      <div class="container">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-description">Ready to start your construction project? Get in touch with our team to discuss your needs.</p>
+        
+        <div class="contact-grid">
+          <!-- Location -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg class="icon icon-lg" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <h3 class="contact-title">Our Location</h3>
+            <div class="contact-info">
+              <p>511 SE 5th Ave, Suite 04</p>
+              <p>Fort Lauderdale, FL 33301</p>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg class="icon icon-lg" viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <h3 class="contact-title">Phone Number</h3>
+            <div class="contact-info">
+              <p>Main: (786) 554-1486</p>
+              <!--<p>Support: (305) 555-5678</p>-->
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg class="icon icon-lg" viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <h3 class="contact-title">Email Address</h3>
+            <div class="contact-info">
+              <p>info@teconllc.com</p>
+              <!--<p>support@teconllc.com</p>-->
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-button-container">
+          <a href="mailto:info@teconllc.com" class="button button-primary button-lg">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" style="margin-right: 0.5rem;">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Get In Touch
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <div class="footer-logo-square"></div>
+            <span class="footer-logo-text">TECON LLC</span>
+          </div>
+          <p class="footer-about">
+            <!--Building excellence since [year]. Quality construction services for commercial, residential, and
+            industrial projects.-->
+          </p>
+        </div>
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#hero" class="footer-link">Home</a></li>
+            <li><a href="#projects" class="footer-link">Projects</a></li>
+            <li><a href="#about" class="footer-link">About</a></li>
+            <li><a href="#services" class="footer-link">Services</a></li>
+            <!--<li><a href="#where-we-work" class="footer-link">Where We Work</a></li>-->
+            <li><a href="#partners" class="footer-link">Partners</a></li>
+            <li><a href="#contact" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Services</h3>
+          <ul class="footer-links">
+            <li><a href="#services" class="footer-link">Feasibility & Development Potential Analysis</a></li>
+            <li><a href="#services" class="footer-link">Advanced Conceptual Design</a></li>
+            <li><a href="#services" class="footer-link">Entitlement & Documentation Coordination</a></li>
+            <li><a href="#services" class="footer-link">Construction Management & Execution</a></li>
+            <li><a href="#services" class="footer-link">Strategic Development Partnerships</a></li>
+            <li><a href="#services" class="footer-link">AI-Enhanced Project Reporting</a></li>
+            <li><a href="#services" class="footer-link">Owner’s Representation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Contact</h3>
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>511 SE 5th Ave, Suite 04, Fort Lauderdale, FL 33301</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span>(786) 554-1486</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>info@teconllc.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2023 Tecon LLC. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Project data for slideshows - using only the main image for each project
+    // This will work even if the additional images don't exist yet
+    const projectData = {
+      sorrento: {
+        title: "Sorrento Villas Hotel",
+        location: "Miami Beach",
+        description: "A 3-story addition to a newly renovated hotel.",
+        images: [
+          { src: "img/sorrento1.jpg", caption: "Sorrento Villas Hotel" },
+          { src: "img/sorrento2.jpg", caption: "Sorrento Villas Hotel" },
+          { src: "img/sorrento3.jpg", caption: "Sorrento Villas Hotel" },
+          { src: "img/sorrento4.jpg", caption: "Sorrento Villas Hotel" },
+          { src: "img/sorrento5.jpg", caption: "Sorrento Villas Hotel" }
+        ]
+      },
+      naples: {
+        title: "Residential Developments",
+        location: "Naples, FL",
+        description: "Residential units as an investment opportunity.",
+        images: [
+          { src: "img/naples1.jpg", caption: "Naples Residential Development" }
+        ]
+      },
+      bestwestern: {
+        title: "Best Western Doral",
+        location: "Doral, FL",
+        description: "Construction management.",
+        images: [
+          { src: "img/bestwestern1.jpg", caption: "Best Western Doral" },
+          { src: "img/bestwestern2.jpg", caption: "Best Western Doral" },
+          { src: "img/bestwestern3.jpg", caption: "Best Western Doral" }
+        ]
+      },      
+      wynwood: {
+        title: "Wynwood Complex",
+        location: "Aventura, FL",
+        description: "Commercial development for rent with high returns.",
+        images: [
+          { src: "img/wynwood1.jpg", caption: "Wynwood Complex" },
+          { src: "img/wynwood2.jpg", caption: "Wynwood Complex" },
+          { src: "img/wynwood3.jpg", caption: "Wynwood Complex" }
+        ]
+      },
+      balharbour: {
+        title: "Bal Harbour Development",
+        location: "Bal Harbour, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/balharbour1.jpg", caption: "Bal Harbour Development" },
+          { src: "img/balharbour2.jpg", caption: "Bal Harbour Development" },
+          { src: "img/balharbour3.jpg", caption: "Bal Harbour Development" }
+        ]
+      },
+      bella: {
+        title: "Bella condominiums",
+        location: "Sunny Isles Beach, FL",
+        description: "Construction management.",
+        images: [
+          { src: "img/bella1.jpg", caption: "Bella condominiums" },
+          { src: "img/bella2.jpg", caption: "Bella condominiums" },
+          { src: "img/bella3.jpg", caption: "Bella condominiums" }
+        ]
+      }, 
+      vanburen: {
+        title: "Van Buren Development",
+        location: "Hollywood, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/vanburen1.jpg", caption: "Van Buren Development" },
+          { src: "img/vanburen2.jpg", caption: "Van Buren Development" }
+        ]
+      },  
+      royalpalm: {
+        title: "327 Royal Palm",
+        location: "Boca Raton, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/royalpalm1.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm2.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm3.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm4.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm5.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm6.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm7.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm8.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm9.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm10.jpg", caption: "327 Royal Palm" },
+          { src: "img/royalpalm11.jpg", caption: "327 Royal Palm" }
+        ]
+      },
+      deerfield: {
+        title: "1900 Deerfield Beach",
+        location: "Deerfield Beach, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/deerfield1.jpg", caption: "1900 Deerfield Beach" },
+          { src: "img/deerfield2.jpg", caption: "1900 Deerfield Beach" },
+          { src: "img/deerfield3.jpg", caption: "1900 Deerfield Beach" }
+        ]
+      },
+      fordham: {
+        title: "The Fordham at Deerfield",
+        location: "Deerfield Beach, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/fordham1.jpg", caption: "The Fordham at Deerfield" },
+          { src: "img/fordham2.jpg", caption: "The Fordham at Deerfield" },
+          { src: "img/fordham3.jpg", caption: "The Fordham at Deerfield" },
+          { src: "img/fordham4.jpg", caption: "The Fordham at Deerfield" },
+          { src: "img/fordham5.jpg", caption: "The Fordham at Deerfield" },
+          { src: "img/fordham6.jpg", caption: "The Fordham at Deerfield" }
+        ]
+      },
+      townhousei: {
+        title: "Bayview Village Townhomes I",
+        location: "Fort Lauderdale, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/townhousei1.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei2.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei3.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei4.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei5.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei6.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhousei7.jpg", caption: "Bayview Village Townhomes I" }
+        ]
+      },
+      townhouseii: {
+        title: "Bayview Village Townhomes I",
+        location: "Fort Lauderdale, FL",
+        description: "Development Advisor.",
+        images: [
+          { src: "img/townhouseii1.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii2.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii3.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii4.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii5.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii6.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii7.jpg", caption: "Bayview Village Townhomes I" },
+          { src: "img/townhouseii8.jpg", caption: "Bayview Village Townhomes I" }
+        ]
+      },
+    };
+
+    // Debug function to help troubleshoot
+    function debug(message) {
+      console.log("DEBUG: " + message);
+    }
+
+    // Slideshow functionality
+    let currentSlideIndex = 0;
+    let currentProject = null;
+    
+    const modal = document.getElementById('slideshow-modal');
+    const slidesContainer = document.querySelector('.slideshow-slides');
+    const captionElement = document.querySelector('.slideshow-caption');
+    const dotsContainer = document.querySelector('.slideshow-dots');
+    const closeButton = document.querySelector('.close-modal');
+    const prevButton = document.querySelector('.slideshow-prev');
+    const nextButton = document.querySelector('.slideshow-next');
+    
+    debug("DOM elements initialized");
+    
+    // Open modal and initialize slideshow
+    function openSlideshow(projectId) {
+      debug("Opening slideshow for project: " + projectId);
+      
+      if (!projectData[projectId]) {
+        debug("Project data not found for: " + projectId);
+        return;
+      }
+      
+      currentProject = projectData[projectId];
+      currentSlideIndex = 0;
+      
+      // Clear previous slides and dots
+      slidesContainer.innerHTML = '';
+      dotsContainer.innerHTML = '';
+      
+      debug("Creating slides for project: " + projectId);
+      
+      // Create slides and dots
+      currentProject.images.forEach((image, index) => {
+        // Create slide
+        const slide = document.createElement('div');
+        slide.className = 'slideshow-slide';
+        slide.style.display = index === 0 ? 'block' : 'none';
+        
+        const img = document.createElement('img');
+        img.src = image.src;
+        img.alt = image.caption;
+        
+        // Add error handling for images
+        img.onerror = function() {
+          debug("Image failed to load: " + image.src);
+          this.src = "https://placehold.co/600x400?text=Image+Not+Found";
+        };
+        
+        slide.appendChild(img);
+        slidesContainer.appendChild(slide);
+        
+        // Create dot
+        const dot = document.createElement('span');
+        dot.className = 'slideshow-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => showSlide(index));
+        dotsContainer.appendChild(dot);
+      });
+      
+      // Set caption for first slide
+      captionElement.textContent = currentProject.images[0].caption;
+      
+      // Show modal
+      modal.style.display = 'flex';
+      debug("Modal displayed");
+      
+      // Prevent body scrolling when modal is open
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // Show specific slide
+    function showSlide(index) {
+      const slides = document.querySelectorAll('.slideshow-slide');
+      const dots = document.querySelectorAll('.slideshow-dot');
+      
+      if (slides.length === 0) {
+        debug("No slides found");
+        return;
+      }
+      
+      // Hide all slides
+      slides.forEach(slide => slide.style.display = 'none');
+      
+      // Remove active class from all dots
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      // Show current slide and activate current dot
+      slides[index].style.display = 'block';
+      if (dots[index]) dots[index].classList.add('active');
+      
+      // Update caption
+      captionElement.textContent = currentProject.images[index].caption;
+      
+      // Update current index
+      currentSlideIndex = index;
+    }
+    
+    // Next slide
+    function nextSlide() {
+      const slides = document.querySelectorAll('.slideshow-slide');
+      if (slides.length <= 1) return;
+      
+      const newIndex = (currentSlideIndex + 1) % slides.length;
+      showSlide(newIndex);
+    }
+    
+    // Previous slide
+    function prevSlide() {
+      const slides = document.querySelectorAll('.slideshow-slide');
+      if (slides.length <= 1) return;
+      
+      const newIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+      showSlide(newIndex);
+    }
+    
+    // Close modal
+    function closeModal() {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      debug("Modal closed");
+    }
+    
+    // Event listeners
+    if (closeButton) {
+      closeButton.addEventListener('click', closeModal);
+      debug("Close button event listener added");
+    }
+    
+    if (prevButton) {
+      prevButton.addEventListener('click', prevSlide);
+      debug("Prev button event listener added");
+    }
+    
+    if (nextButton) {
+      nextButton.addEventListener('click', nextSlide);
+      debug("Next button event listener added");
+    }
+    
+    // Close modal when clicking outside of content
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (modal.style.display === 'flex') {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'Escape') closeModal();
+      }
+    });
+    
+    debug("Setting up project card click handlers");
+    
+    // Add click event to project cards
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Don't trigger if clicking on the button
+        if (e.target.closest('.view-project')) return;
+        
+        const projectId = card.getAttribute('data-project');
+        debug("Project card clicked: " + projectId);
+        openSlideshow(projectId);
+      });
+    });
+    
+    // Add click event to view project buttons
+    document.querySelectorAll('.view-project').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent triggering the card click event
+        const projectId = e.target.closest('.project-card').getAttribute('data-project');
+        debug("View project button clicked: " + projectId);
+        openSlideshow(projectId);
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth'
+          });
         }
+      });
+    });
 
-        function closeSlideshow() {
-            overlay.classList.remove('open');
-            document.body.style.overflow = '';
-            mainImg.src = '';
+    // Update active nav dot based on scroll position
+    const sections = document.querySelectorAll('section, footer');
+    const navDots = document.querySelectorAll('.nav-dot');
+    
+    function updateActiveSection() {
+      let currentSectionIndex = 0;
+      
+      sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const scrollPosition = window.scrollY;
+        
+        if (scrollPosition >= sectionTop - window.innerHeight / 2) {
+          currentSectionIndex = index;
         }
-
-        function showSlide(index) {
-            current = Math.max(0, Math.min(index, images.length - 1));
-            mainImg.classList.remove('loaded');
-            mainImg.onload = () => mainImg.classList.add('loaded');
-            mainImg.src    = images[current];
-            counterEl.textContent = `${current + 1} / ${images.length}`;
-            btnPrev.disabled = current === 0;
-            btnNext.disabled = current === images.length - 1;
-
+      });
+      
+      navDots.forEach((dot, index) => {
+        if (index === currentSectionIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
         }
-
-        // Open on project click
-        document.querySelectorAll('.work-item').forEach(item => {
-            item.addEventListener('click', e => {
-                e.preventDefault();
-                openSlideshow(item);
-            });
-        });
-
-        // Controls
-        btnPrev.addEventListener('click',  () => showSlide(current - 1));
-        btnNext.addEventListener('click',  () => showSlide(current + 1));
-        btnClose.addEventListener('click', closeSlideshow);
-
-        // Keyboard
-        document.addEventListener('keydown', e => {
-            if (!overlay.classList.contains('open')) return;
-            if (e.key === 'ArrowLeft')  showSlide(current - 1);
-            if (e.key === 'ArrowRight') showSlide(current + 1);
-            if (e.key === 'Escape')     closeSlideshow();
-        });
-        // ── SCROLL SNAP: header → main on first scroll ──
-        const scrollHint = document.getElementById('scrollHint');
-        const mainEl     = document.querySelector('main');
-
-        // Click hint → scroll to main
-        scrollHint.addEventListener('click', () => {
-            mainEl.scrollIntoView({ behavior: 'smooth' });
-        });
-
-        // Hide hint once user scrolls past header
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) {
-                scrollHint.classList.add('hidden');
-            } else {
-                scrollHint.classList.remove('hidden');
-            }
-        }, { passive: true });
-    </script>
+      });
+    }
+    
+    window.addEventListener('scroll', updateActiveSection);
+    updateActiveSection();
+    
+    // Log when the script has fully loaded
+    debug("Script fully loaded");
+  </script>
 </body>
 </html>
+
